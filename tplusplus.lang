@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ 	    COMPILADORES
+ HIGHLIGHT SYNTAX - LINGUAGEM TPLUSPLUS
+ Autor: Luiz Felipe Fronchetti Dias
+
+ Highlight Syntax no Gedit (Editor de texto padrão):
+
+ Para descrever a sintaxe da linguagem, o Gedit utiliza 
+ um formato XML (linguagem.lang), que define o contexto que deve ser denotado em importância.
+ 
+ O tutorial usado para esta descrição de linguagem está contido na própria página da Gnome
+ Tutorial (URL): https://developer.gnome.org/gtksourceview/stable/lang-tutorial.html
+ Informações (URL): https://wiki.gnome.org/Apps/Gedit/HighlighterAndBundles
+
+ Gedit usa o GTKSourceView para highlight de sintaxe, e arquivos como este devem ser armazenados no
+ seguinte diretório: /usr/share/gtksourceview-{versão}/language-specs/
+
+ Como base para esta implementação, o arquivo de descrição da linguagem Python foi utilizado.
+ A versão usada do GTKSourceView nesta definição foi a 3.0.
+-->
+
+<!--
+	O primeiro e principal elemento é o <language>
+	"id" - é usado para referências externas sobre como a linguagem é definida
+	"_name" - é o nome apresentado ao usuário dentro do editor de texto
+	"_section" - é a categoria a qual a linguagem se enquadra (marcação, científica, scripts (...))
+	
+	<language> contém três subseções: <metadata>, <styles> e <definitions> 
+-->
+<language id="tpp" _name="Tiny Plus Plus" version="2.0" _section="Other">
+
+<!--
+	<metadata> É a primeira e única subseção opcional, provê uma porção de propriedades arbitrárias que definem os arquivos da linguagem em questão
+		   Ela é muito importante, visto que classificará quais as extensões de arquivos usadas por esta definição de linguagem. Neste caso, *.tpp!
+-->
+  <metadata>
+    <property name="mimetypes">text/x-tpp;</property>
+    <property name="globs">*.tpp</property>
+  </metadata>
+
+<!--
+	<styles> - Este elemento contém todas as associações entre os estilos usados na descrição da linguagem e os armazenados por padrão pelo GTKSourceView
+		   Estes estilos serão relevantes logo abaixo, quando fizermos as definições da linguagem para cada elemento proposto. Quando associamos um estilo
+		   à uma definição, garantimos que todos os elementos enquadrados naquela definição irão seguir o estilo determinado.
+-->
+
+  <styles>
+    <style id="comment" _name="Comentarios" map-to="def:comment"/> <!-- <style> "id" e "map-to" são os responsáveis pela associação descrita anteriormente. _name é o que será apresentado aos usuários-->
+    <style id="keyword" _name="Reservadas" map-to="def:keyword"/>
+    <style id="type" _name="Tipos" map-to="def:type"/>
+    <style id="format" _name="Formatos" map-to="def:character"/>
+  </styles>
+
+<!--
+	<definitions> Contém a descrição completa da sintaxe. Dica importante: Obrigatoriamente, o contexto principal abaixo deve possuir um "id" similar ao do elemento <language>.
+-->
+  <definitions>
+    <context id="tpp">
+      <include> <!-- <include> Contém a lista de sub-contextos referentes ao contexto atual (Linguagem Tiny Plus Plus) -->
+
+<!--
+	Números
+-->
+	<context id="number" style-ref="format">
+		<match>[0-9]+(\.[0-9]+)?([eE][+-]?[0-9]+)?</match>
+	</context>
+
+<!--
+	Palavras reservadas
+-->
+        <context id="keywords" style-ref="keyword">
+          <keyword>se</keyword>
+          <keyword>então</keyword>
+          <keyword>senão</keyword>
+          <keyword>repita</keyword>
+          <keyword>até</keyword>
+          <keyword>fim</keyword>
+          <keyword>retorna</keyword>
+          <keyword>leia</keyword>
+          <keyword>escreva</keyword>
+        </context>
+
+<!--
+	Tipos da linguagem
+-->
+	<context id="types" style-ref="type">
+	  <keyword>inteiro</keyword>
+	  <keyword>flutuante</keyword>
+	</context>
+
+<!--
+	Comentários
+-->	
+	<context id="comment" style-ref="comment">
+		<match>\{.*\}</match>
+	</context>
+      </include>
+    </context>
+  </definitions>
+</language>
+
+
+<!--
+	Dica importante! 
+	Ao especificar uma linguagem para o Gedit, é possível "debugar" o código executando o próprio editor pelo terminal.
+	Se algum erro ocorrer na especificação, o próprio editor avisará em modo texto. É muito útil! :-)
+-->	

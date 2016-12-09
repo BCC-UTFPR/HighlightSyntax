@@ -1,0 +1,15 @@
+Linguagem Tiny Plus Plus - Highlight Syntax
+Autor: Luiz Felipe Fronchetti Dias
+
+Para aplicar as definições de sintaxe, faça uma cópia do arquivo tplusplus.lang para o diretório:
+/usr/share/gtksourceview-{versão-instalada}/language-specs/
+Reinicie o Gedit e está feito! Ao abrir um arquivo *.tpp, o Gedit aplicará as mudanças. 
+Uma outra opção, caso necessário é acessando a aba: Ver -> Modo de destaque... -> Tiny Plus Plus
+
+* Para maiores informações, e para um tutorial mais detalhado de como funcionam as especificações, 
+ abra o arquivo tplusplus.lang, lá você encontrará todas as explicações necessárias feitas por mim.
+
+Agradecimentos:
+O tutorial usado para esta descrição de linguagem está contido na própria página da Gnome
+	+ Tutorial (URL): https://developer.gnome.org/gtksourceview/stable/lang-tutorial.html
+ 	+ Informações (URL): https://wiki.gnome.org/Apps/Gedit/HighlighterAndBundles
